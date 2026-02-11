@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Business Name - Professional Services in Lahore</title>
+  <meta name="description" content="Reliable business consulting, IT solutions, and services based in Lahore, Pakistan."/>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Poppins',sans-serif; line-height:1.6; color:#333; background:#f8f9fa; }
+    a { text-decoration:none; color:inherit; }
+
+    header {
+      position:fixed; width:100%; top:0; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      z-index:1000; transition:background 0.3s;
+    }
+    header.scrolled { background:rgba(255,255,255,0.98); }
+
+    nav {
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1200px; margin:0 auto; padding:1rem 2rem;
+    }
+    .logo { font-size:1.6rem; font-weight:700; color:#0d6efd; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
+    .nav-links li a { font-weight:500; transition:color 0.3s; }
+    .nav-links li a:hover { color:#0d6efd; }
+    .menu-toggle { display:none; font-size:1.8rem; cursor:pointer; }
+
+    #hero {
+      height:100vh; min-height:600px;
+      background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+      background-size:cover; background-position:center; color:white;
+      display:flex; align-items:center; text-align:center; padding:0 1rem;
+    }
+    .hero-content { max-width:800px; margin:0 auto; }
+    .hero-content h1 { font-size:3.2rem; margin-bottom:1.2rem; }
+    .hero-content p { font-size:1.3rem; margin-bottom:2rem; opacity:0.9; }
+    .btn {
+      display:inline-block; background:#0d6efd; color:white;
+      padding:0.9rem 2.2rem; border-radius:50px; font-weight:500;
+      transition:all 0.3s;
+    }
+    .btn:hover { background:#0b5ed7; transform:translateY(-3px); box-shadow:0 8px 20px rgba(13,110,253,0.3); }
+
+    section { padding:6rem 2rem; max-width:1200px; margin:0 auto; }
+    h2 { text-align:center; font-size:2.5rem; margin-bottom:3rem; color:#222; }
+
+    .services-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem;
+    }
+    .service-card {
+      background:white; padding:2.5rem; border-radius:12px;
+      box-shadow:0 5px 25px rgba(0,0,0,0.08); text-align:center; transition:transform 0.3s;
+    }
+    .service-card:hover { transform:translateY(-10px); }
+    .service-card h3 { margin:1.2rem 0 1rem; color:#0d6efd; }
+
+    footer { background:#222; color:white; text-align:center; padding:2rem; font-size:0.95rem; }
+
+    @media (max-width:768px) {
+      .nav-links { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%;
+        background:white; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+      .nav-links.active { display:flex; }
+      .menu-toggle { display:block; }
+      .hero-content h1 { font-size:2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <nav>
+      <div class="logo">YourBusiness</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="hero-content">
+      <h1>Empowering Your Business in Lahore</h1>
+      <p>Professional consulting, IT solutions, and strategic services tailored for small & medium businesses in Pakistan.</p>
+      <a href="contact.html" class="btn">Get in Touch</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We are a Lahore-based team with over 8 years of experience helping local businesses grow through smart strategies, digital transformation, and reliable support.</p>
+    <p>Our mission: deliver real results with transparency, professionalism, and deep understanding of the Pakistani market.</p>
+  </section>
+
+  <section id="services" style="background:#f1f5f9;">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card"><h3>Business Consulting</h3><p>Strategic planning, market analysis, growth roadmaps.</p></div>
+      <div class="service-card"><h3>Web & App Development</h3><p>Modern, fast, mobile-friendly websites & applications.</p></div>
+      <div class="service-card"><h3>Digital Marketing</h3><p>SEO, social media, Google Ads — reach more customers.</p></div>
+      <div class="service-card"><h3>IT Support & Training</h3><p>Cloud setup, cybersecurity basics, staff training.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Your Business Name. All rights reserved. | Lahore, Pakistan | <a href="tel:+923001234567">+92 300 1234567</a></p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+        navLinks.classList.remove('active');
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>

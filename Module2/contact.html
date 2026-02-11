@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Your Business Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Poppins',sans-serif; line-height:1.6; color:#333; background:#f8f9fa; }
+    a { text-decoration:none; color:inherit; }
+
+    header {
+      position:fixed; width:100%; top:0; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      z-index:1000;
+    }
+    nav {
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1200px; margin:0 auto; padding:1rem 2rem;
+    }
+    .logo { font-size:1.6rem; font-weight:700; color:#0d6efd; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
+    .nav-links li a { font-weight:500; transition:color 0.3s; }
+    .nav-links li a:hover { color:#0d6efd; }
+    .menu-toggle { display:none; font-size:1.8rem; cursor:pointer; }
+
+    .message {
+      position:fixed; top:80px; left:50%; transform:translateX(-50%);
+      background:#d4edda; color:#155724; padding:1rem 2rem;
+      border-radius:8px; border:1px solid #c3e6cb; box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      z-index:2000; display:none; font-weight:500; min-width:300px; text-align:center;
+    }
+
+    section { padding:8rem 2rem 4rem; max-width:800px; margin:0 auto; }
+    h1 { text-align:center; font-size:2.8rem; margin-bottom:1.5rem; color:#222; }
+    form {
+      display:grid; gap:1.4rem; background:white; padding:2.5rem;
+      border-radius:12px; box-shadow:0 5px 25px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      padding:1rem; border:1px solid #ddd; border-radius:8px; font-size:1rem;
+      font-family:inherit;
+    }
+    textarea { min-height:160px; resize:vertical; }
+    .btn {
+      background:#0d6efd; color:white; border:none; padding:1rem 2rem;
+      border-radius:50px; font-size:1.1rem; cursor:pointer; transition:all 0.3s;
+    }
+    .btn:hover { background:#0b5ed7; transform:translateY(-3px); }
+
+    footer { background:#222; color:white; text-align:center; padding:2rem; }
+
+    @media (max-width:768px) {
+      .nav-links { display:none; flex-direction:column; position:absolute; top:100%; left:0; width:100%;
+        background:white; padding:1.5rem; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+      .nav-links.active { display:flex; }
+      .menu-toggle { display:block; }
+      section { padding-top:7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="successMessage" class="message">Thank you! Your message has been sent. We'll get back to you soon.</div>
+
+  <header>
+    <nav>
+      <div class="logo">YourBusiness</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <section>
+    <h1>Get in Touch</h1>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <input type="tel" placeholder="Phone / WhatsApp" required/>
+      <textarea placeholder="Your Message..." required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2026 Your Business Name. Lahore, Pakistan | <a href="tel:+923001234567">+92 300 1234567</a></p>
+  </footer>
+
+  <script>
+    // Mobile menu
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    // Form submission → show nice message at top
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const msg = document.getElementById('successMessage');
+      msg.style.display = 'block';
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 5000);
+
+      // Optional: clear form
+      this.reset();
+    });
+  </script>
+</body>
+</html>
