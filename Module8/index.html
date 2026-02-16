@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blossom — Modern Office</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #a9cfd4;
+      --ink: #0f1a1c;
+      --muted: #5d6b70;
+      --card: #ffffff;
+      --line: #e8eef0;
+      --primary: #132a33;
+      --primary2:#0f2a33;
+      --radius: 22px;
+      --shadow: 0 22px 60px rgba(0,0,0,.12);
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background: var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    .page{
+      min-height:100vh;
+      padding: 42px 18px 70px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .frame{
+      width: min(var(--max), 100%);
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.04);
+    }
+
+    .topbar{
+      background: #0d1f25;
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      padding: 10px 18px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .topbar .right{display:flex; gap:14px; align-items:center}
+    .pill{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.22);
+      color: rgba(255,255,255,.86);
+      font-weight:600;
+      font-size: 12px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      position:relative;
+      background:#fff;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .brand .logo{
+      width:32px; height:32px;
+      border-radius:10px;
+      background: linear-gradient(135deg, #0f2a33, #1f5a64);
+      display:grid; place-items:center;
+      color:#fff; font-family: Playfair Display, serif;
+    }
+
+    .navlinks{
+      display:flex;
+      gap: 18px;
+      align-items:center;
+      font-weight:500;
+      color:#24353a;
+    }
+    .navlinks a{opacity:.88}
+    .navlinks a:hover{opacity:1}
+
+    .navright{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .iconbtn{
+      width:38px; height:38px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      display:grid; place-items:center;
+      background:#fff;
+      cursor:pointer;
+    }
+    .btn{
+      border:0;
+      background: var(--primary);
+      color:#fff;
+      padding: 11px 14px;
+      border-radius: 999px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .btn:hover{background: var(--primary2)}
+    .menuBtn{display:none}
+
+    .hero{
+      background: #7fb1b6;
+      color:#fff;
+      padding: 44px 18px 54px;
+    }
+    .heroInner{
+      width: min(980px, 100%);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 34px;
+      align-items:center;
+    }
+    .kicker{
+      opacity:.9;
+      font-size: 12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom: 10px;
+    }
+    h1{
+      margin:0 0 14px;
+      font-family: "Playfair Display", serif;
+      font-weight:700;
+      line-height:1.05;
+      font-size: clamp(34px, 4vw, 56px);
+    }
+    .lead{
+      margin:0 0 20px;
+      color: rgba(255,255,255,.92);
+      max-width: 52ch;
+      font-size: 14px;
+      line-height:1.7;
+    }
+    .heroActions{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .btnLight{
+      background:#fff;
+      color: #0f2a33;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border:0;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btnGhost{
+      background: rgba(255,255,255,.12);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,.28);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .heroArt{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08);
+      min-height: 280px;
+    }
+    .heroArt img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.95;
+    }
+
+    .section{
+      padding: 28px 18px 0;
+      background: #f6f9fa;
+    }
+
+    .grid2{
+      width: min(980px, 100%);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding-bottom: 18px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      min-height: 260px;
+      display:grid;
+    }
+    .card.pad{padding: 22px 22px 18px}
+    .card h2{
+      margin: 4px 0 10px;
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      line-height:1.1;
+      color:#132a33;
+    }
+    .card p{
+      margin:0 0 16px;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    .rowActions{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      margin-top: 6px;
+    }
+    .link{
+      color: #0f2a33;
+      font-weight:700;
+      font-size: 14px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .media{
+      background:#e7f0f2;
+      display:grid;
+      place-items:center;
+      padding: 0;
+    }
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .ctaBanner{
+      padding: 0 18px 22px;
+      background:#f6f9fa;
+    }
+    .ctaInner{
+      width: min(980px, 100%);
+      margin: 0 auto;
+      background: #7fb1b6;
+      color:#fff;
+      border-radius: var(--radius);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:center;
+      gap: 16px;
+    }
+    .ctaText{padding: 26px}
+    .ctaText h3{
+      margin:0 0 10px;
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      line-height:1.1;
+    }
+    .ctaText p{margin:0 0 14px; color: rgba(255,255,255,.92); line-height:1.7; font-size: 14px}
+    .ctaImage img{width:100%; height:100%; object-fit:cover; opacity:.95}
+
+    footer{
+      background:#fff;
+      border-top: 1px solid var(--line);
+      padding: 26px 18px;
+    }
+    .footerInner{
+      width: min(980px, 100%);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr .8fr 1.2fr;
+      gap: 18px;
+      align-items:start;
+    }
+    .footerTitle{
+      font-weight:800;
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing:.02em;
+      color:#132a33;
+    }
+    .footerList{display:grid; gap:8px; color: var(--muted); font-size: 14px}
+    .small{color: var(--muted); font-size: 13px; line-height:1.6}
+    .footerBottom{
+      width: min(980px, 100%);
+      margin: 18px auto 0;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px){
+      .heroInner{grid-template-columns: 1fr; }
+      .ctaInner{grid-template-columns: 1fr;}
+      .grid2{grid-template-columns: 1fr}
+      .footerInner{grid-template-columns: 1fr 1fr}
+      .menuBtn{display:grid}
+      .navlinks{
+        display:none;
+        position:absolute;
+        left: 18px;
+        right: 18px;
+        top: 68px;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        flex-direction:column;
+        align-items:flex-start;
+        gap: 12px;
+        box-shadow: 0 18px 44px rgba(0,0,0,.10);
+      }
+      .navlinks.open{display:flex}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="frame">
+
+      <div class="topbar">
+        <div>Free shipping over $99 • 30-day returns</div>
+        <div class="right">
+          <span>English</span>
+          <a class="pill" href="#">Get in touch</a>
+        </div>
+      </div>
+
+      <header class="nav">
+        <a class="brand" href="index.html">
+          <span class="logo">B</span>
+          <span>Blossom</span>
+        </a>
+
+        <nav id="navlinks" class="navlinks">
+          <a href="#collections">Collections</a>
+          <a href="#shop">Shop</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="navright">
+          <button class="iconbtn" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M21 21l-4.3-4.3"></path>
+            </svg>
+          </button>
+
+          <a class="iconbtn" href="cart.html" aria-label="Cart">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 7h12l-1 14H7L6 7z"></path>
+              <path d="M9 7a3 3 0 0 1 6 0"></path>
+            </svg>
+          </a>
+
+          <span style="font-weight:800;">
+            Cart (<span data-cart-count>0</span>)
+          </span>
+
+          <button class="btn">Book now</button>
+
+          <button class="iconbtn menuBtn" id="menuBtn" aria-label="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="heroInner">
+          <div>
+            <div class="kicker">Modern & Minimal Furniture</div>
+            <h1>Make office life feel lighter.</h1>
+            <p class="lead">
+              Curated seating, lighting, and décor with a calm, modern look—built for focus,
+              comfort, and clean aesthetics.
+            </p>
+            <div class="heroActions">
+              <button class="btnLight">Explore Collection</button>
+              <button class="btnGhost">Watch Video</button>
+            </div>
+          </div>
+
+          <div class="heroArt" aria-hidden="true">
+            <img alt=""
+              src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80">
+          </div>
+        </div>
+      </section>
+
+      <main class="section" id="shop">
+        <div class="grid2">
+          <article class="card pad">
+            <div class="kicker" style="color:#5d6b70; letter-spacing:.18em;">New arrivals</div>
+            <h2>Get work done in style.</h2>
+            <p>
+              Clean lines, soft materials, and ergonomic comfort. Upgrade your workspace with pieces that
+              look great and feel even better.
+            </p>
+            <div class="rowActions">
+              <button class="btn" onclick="location.href='chair.html'">Shop chair</button>
+              <a class="link" href="#collections">Learn more →</a>
+            </div>
+          </article>
+
+          <!-- CLICK THIS CHAIR to open chair.html -->
+          <a class="card media" href="chair.html" aria-label="Open chair product page">
+            <img
+              src="https://images.unsplash.com/photo-1582582621959-48d27397dc2b?auto=format&fit=crop&w=1400&q=80"
+              alt="Modern chair">
+          </a>
+
+          <article class="card media" aria-label="Decor image">
+            <img
+              src="https://images.unsplash.com/photo-1523413459620-7bfbf622d115?auto=format&fit=crop&w=1400&q=80"
+              alt="Minimal decor">
+          </article>
+
+          <article class="card pad" id="collections">
+            <div class="kicker" style="color:#5d6b70; letter-spacing:.18em;">Curated sets</div>
+            <h2>Pick a set that fits.</h2>
+            <p>
+              Choose from warm neutrals, cool tones, or bold accents. Mix and match chairs, lamps,
+              tables, and décor for a cohesive look.
+            </p>
+            <div class="rowActions">
+              <button class="btn">View sets</button>
+              <a class="link" href="#about">Pricing →</a>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <section class="ctaBanner" id="about">
+        <div class="ctaInner">
+          <div class="ctaText">
+            <div class="kicker">Limited offer</div>
+            <h3>Design help, included.</h3>
+            <p>
+              Tell us your space and style—get a free layout suggestion and product shortlist.
+              Simple, fast, and tailored to your needs.
+            </p>
+            <button class="btnLight">Request a mockup</button>
+          </div>
+          <div class="ctaImage">
+            <img
+              src="https://images.unsplash.com/photo-1549497538-303791108f95?auto=format&fit=crop&w=1400&q=80"
+              alt="Workspace inspiration">
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact">
+        <div class="footerInner">
+          <div>
+            <div class="footerTitle">We craft calm workspaces</div>
+            <p class="small">
+              Minimal furniture and décor with premium finishes, designed to support focus and comfort.
+            </p>
+          </div>
+
+          <div>
+            <div class="footerTitle">Links</div>
+            <div class="footerList">
+              <a href="#collections">Collections</a>
+              <a href="#shop">Shop</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footerTitle">Company</div>
+            <div class="footerList">
+              <a href="#">Shipping</a>
+              <a href="#">Returns</a>
+              <a href="#">Privacy</a>
+              <a href="#">Terms</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footerTitle">Newsletter</div>
+            <p class="small">Get product drops + workspace tips. No spam.</p>
+            <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+              <input
+                style="flex:1; min-width:210px; padding:12px 14px; border-radius:999px; border:1px solid var(--line); outline:none;"
+                type="email" placeholder="Email address" />
+              <button class="btn">Subscribe</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footerBottom">
+          <div>© <span id="year"></span> Blossom. All rights reserved.</div>
+          <div style="display:flex; gap:10px;">
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+            <a href="#">Dribbble</a>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("menuBtn");
+    const links = document.getElementById("navlinks");
+    if (btn) btn.addEventListener("click", () => links.classList.toggle("open"));
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script type="module">
+    import { bindCartCount } from "./cart.js";
+    bindCartCount();
+  </script>
+</body>
+</html>

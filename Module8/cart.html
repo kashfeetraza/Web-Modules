@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Cart — Blossom</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#a9cfd4; --card:#fff; --ink:#132a33; --muted:#5d6b70;
+      --line:#e6eef0; --primary:#132a33; --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,sans-serif;background:var(--bg);color:var(--ink)}
+    a{text-decoration:none;color:inherit}
+    .page{padding:40px 18px 70px;display:flex;justify-content:center}
+    .frame{width:min(1100px,100%);background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.12)}
+    .nav{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+    .brand{font-weight:900}
+    .btn{background:var(--primary);color:#fff;border:0;padding:12px 18px;border-radius:999px;font-weight:800;cursor:pointer}
+    .btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+    .content{padding:26px 22px}
+    h1{font-family:"Playfair Display",serif;margin:0 0 12px;font-size:34px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns: 1.2fr .8fr;gap:18px;align-items:start;margin-top:18px}
+    .panel{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+    .panelHeader{padding:14px 14px;border-bottom:1px solid var(--line);font-weight:900}
+    .items{padding:14px}
+    .item{display:grid;grid-template-columns: 90px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+    .item:last-child{border-bottom:0}
+    .thumb{width:90px;height:70px;border-radius:12px;overflow:hidden;background:#eef5f6;border:1px solid var(--line)}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .name{font-weight:900;margin-bottom:6px}
+    .meta{font-size:13px;color:var(--muted);line-height:1.5}
+    .controls{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+    input.qty{width:72px;padding:10px;border:1px solid var(--line);border-radius:10px;text-align:center}
+    .link{background:none;border:0;color:#b23b3b;font-weight:900;cursor:pointer}
+    .summary{padding:14px}
+    .row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+    .row:last-child{border-bottom:0}
+    .total{font-weight:1000;font-size:18px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="frame">
+      <div class="nav">
+        <a class="brand" href="index.html">← Continue shopping</a>
+        <div style="font-weight:900;">Cart (<span data-cart-count>0</span>)</div>
+      </div>
+
+      <div class="content">
+        <h1>Your Cart</h1>
+        <div class="muted">Change quantity, remove items, or clear cart.</div>
+
+        <div class="grid">
+          <div class="panel">
+            <div class="panelHeader">Items</div>
+            <div class="items" id="items"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panelHeader">Summary</div>
+            <div class="summary">
+              <div class="row"><div>Subtotal</div><div id="subtotal">$0.00</div></div>
+              <div class="row"><div>Shipping</div><div class="muted">Calculated at checkout</div></div>
+              <div class="row total"><div>Total</div><div id="total">$0.00</div></div>
+
+              <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+                <button class="btn" id="payBtn">Pay with Card</button>
+                <button class="btn secondary" id="clearBtn">Clear cart</button>
+              </div>
+
+              <p class="muted" style="margin-top:12px; font-size:12px;">
+                Demo checkout. You can connect Stripe/PayPal later.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+  import { getCart, bindCartCount, updateQty, removeItem, clearCart, cartTotal, money } from "./cart.js";
+
+  bindCartCount();
+
+  const itemsEl = document.getElementById("items");
+  const subtotalEl = document.getElementById("subtotal");
+  const totalEl = document.getElementById("total");
+  const clearBtn = document.getElementById("clearBtn");
+  const payBtn = document.getElementById("payBtn");
+
+  function render() {
+    const cart = getCart();
+
+    if (!cart.length) {
+      itemsEl.innerHTML = `
+        <div class="muted" style="padding:10px;">
+          Your cart is empty. <a href="index.html" style="text-decoration:underline; font-weight:900;">Go shopping</a>.
+        </div>
+      `;
+    } else {
+      itemsEl.innerHTML = cart.map(item => `
+        <div class="item">
+          <div class="thumb">
+            <img src="${item.image}" alt="${item.name}">
+          </div>
+
+          <div>
+            <div class="name">${item.name}</div>
+            <div class="meta">
+              ${item.variant ? `Variant: <b>${item.variant}</b><br>` : ""}
+              Price: <b>${money(item.price)}</b>
+            </div>
+          </div>
+
+          <div class="controls">
+            <input class="qty" type="number" min="1" value="${item.qty}"
+              data-qty
+              data-id="${item.id}"
+              data-variant="${item.variant || ""}"
+            />
+            <button class="link"
+              data-remove
+              data-id="${item.id}"
+              data-variant="${item.variant || ""}">
+              Remove
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    const total = cartTotal();
+    subtotalEl.textContent = money(total);
+    totalEl.textContent = money(total);
+  }
+
+  // Qty change
+  itemsEl.addEventListener("input", (e) => {
+    const t = e.target;
+    if (!t.matches("[data-qty]")) return;
+    updateQty(t.dataset.id, t.dataset.variant, t.value);
+  });
+
+  // Remove
+  itemsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-remove]");
+    if (!btn) return;
+    removeItem(btn.dataset.id, btn.dataset.variant);
+  });
+
+  clearBtn.addEventListener("click", () => clearCart());
+
+  // ✅ PAY WITH STRIPE
+  payBtn.addEventListener("click", async () => {
+    const cart = getCart();
+    if (!cart.length) return alert("Your cart is empty.");
+
+    try {
+      // Your backend endpoint (we build it in step 3)
+      const res = await fetch("http://127.0.0.1:4242/create-checkout-session", {
+
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart })
+      });
+
+      const data = await res.json();
+      if (!data.url) throw new Error("No Stripe URL returned.");
+
+      // Redirect to Stripe Checkout hosted page
+      window.location.href = data.url;
+    } catch (err) {
+      console.error(err);
+      alert("Payment server not running. Start backend first (Step 3).");
+    }
+  });
+
+  window.addEventListener("cart:updated", render);
+  render();
+</script>
+
+</body>
+</html>

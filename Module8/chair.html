@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Lounge Chair — Blossom</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#a9cfd4;
+      --card:#ffffff;
+      --ink:#132a33;
+      --muted:#5d6b70;
+      --line:#e6eef0;
+      --primary:#132a33;
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+    }
+    a{text-decoration:none; color:inherit}
+    img{max-width:100%; display:block}
+
+    .page{
+      padding:40px 18px 70px;
+      display:flex;
+      justify-content:center;
+    }
+    .frame{
+      width:min(1100px,100%);
+      background:var(--card);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 25px 60px rgba(0,0,0,.12);
+    }
+
+    .nav{
+      padding:18px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid var(--line);
+    }
+    .brand{font-weight:800}
+    .btn{
+      background:var(--primary);
+      color:#fff;
+      border:0;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .product{
+      padding:40px 30px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .product h1{
+      font-family:"Playfair Display", serif;
+      font-size:42px;
+      margin:0 0 10px;
+    }
+
+    .price{
+      font-size:22px;
+      font-weight:800;
+      margin:10px 0 20px;
+    }
+
+    .desc{
+      color:var(--muted);
+      line-height:1.7;
+      margin-bottom:25px;
+      font-size:14px;
+    }
+
+    .options{margin-bottom:25px;}
+    .color-options{
+      display:flex;
+      gap:12px;
+      margin-top:10px;
+    }
+    .color{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      cursor:pointer;
+      border:2px solid transparent;
+    }
+    .color.selected{border:2px solid #000;}
+
+    .qty{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .qty input{
+      width:70px;
+      padding:10px;
+      text-align:center;
+      border-radius:10px;
+      border:1px solid var(--line);
+      outline:none;
+    }
+
+    .features{
+      margin-top:10px;
+      padding:30px;
+      background:#f6f9fa;
+      border-top:1px solid var(--line);
+    }
+    .features h3{margin-top:0;font-size:22px;}
+    .features ul{
+      padding-left:20px;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:14px;
+    }
+
+    @media(max-width:900px){
+      .product{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+<div class="frame">
+
+  <div class="nav">
+    <a href="index.html" class="brand">← Back to Shop</a>
+    <a href="cart.html" class="btn">Cart (<span data-cart-count>0</span>)</a>
+  </div>
+
+  <section class="product">
+    <div>
+      <img
+        src="https://images.unsplash.com/photo-1582582621959-48d27397dc2b?auto=format&fit=crop&w=1200&q=80"
+        alt="Modern Lounge Chair">
+    </div>
+
+    <div>
+      <h1>Modern Lounge Chair</h1>
+      <div class="price">$249.00</div>
+
+      <p class="desc">
+        A beautifully crafted lounge chair designed for modern workspaces.
+        Premium fabric upholstery, ergonomic support, and a sleek metal base.
+      </p>
+
+      <div class="options">
+        <strong>Choose Color:</strong>
+        <div class="color-options">
+          <div class="color selected" data-variant="Teal" style="background:#6b8f97;"></div>
+          <div class="color" data-variant="Sand" style="background:#c2b8a3;"></div>
+          <div class="color" data-variant="Charcoal" style="background:#2f3e46;"></div>
+        </div>
+      </div>
+
+      <div class="qty">
+        <strong>Quantity:</strong>
+        <input id="qty" type="number" value="1" min="1">
+      </div>
+
+      <button class="btn" id="addToCartBtn">Add to Cart</button>
+      <p id="addedMsg" style="margin-top:12px; color:#2f3e46; font-weight:800; display:none;">
+        ✅ Added to cart!
+      </p>
+    </div>
+  </section>
+
+  <section class="features">
+    <h3>Product Details</h3>
+    <ul>
+      <li>Ergonomic curved back support</li>
+      <li>Premium woven fabric upholstery</li>
+      <li>Metal swivel base</li>
+      <li>Weight capacity: 120kg</li>
+      <li>2-year warranty included</li>
+    </ul>
+  </section>
+
+</div>
+</div>
+
+<script type="module">
+  import { addToCart, bindCartCount } from "./cart.js";
+
+  bindCartCount();
+
+  // Color selection
+  const colors = document.querySelectorAll(".color");
+  colors.forEach(color => {
+    color.addEventListener("click", () => {
+      colors.forEach(c => c.classList.remove("selected"));
+      color.classList.add("selected");
+    });
+  });
+
+  // Add to cart
+  const addBtn = document.getElementById("addToCartBtn");
+  const msg = document.getElementById("addedMsg");
+  const qtyInput = document.getElementById("qty");
+
+  addBtn.addEventListener("click", () => {
+    const selected = document.querySelector(".color.selected");
+    const variant = selected ? selected.dataset.variant : "";
+
+    const qty = Math.max(1, Number(qtyInput.value) || 1);
+
+    addToCart(
+      {
+        id: "chair-modern-lounge",
+        name: "Modern Lounge Chair",
+        price: 249.00,
+        image: "https://images.unsplash.com/photo-1582582621959-48d27397dc2b?auto=format&fit=crop&w=1200&q=80"
+      },
+      qty,
+      variant
+    );
+
+    msg.style.display = "block";
+    setTimeout(() => (msg.style.display = "none"), 1200);
+  });
+</script>
+
+</body>
+</html>
