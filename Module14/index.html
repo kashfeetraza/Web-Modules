@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Character UI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0d1b24;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ================= NAVBAR ================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    position:absolute;
+    width:100%;
+    z-index:10;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:40px;
+}
+
+nav ul li{
+    cursor:pointer;
+    opacity:0.8;
+}
+
+nav ul li:hover{
+    opacity:1;
+}
+
+.nav-right{
+    display:flex;
+    gap:15px;
+}
+
+.btn-outline{
+    padding:8px 20px;
+    border-radius:20px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+}
+
+.btn-fill{
+    padding:8px 20px;
+    border-radius:20px;
+    border:none;
+    background:linear-gradient(45deg,#19d3da,#00f5d4);
+    cursor:pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    height:100vh;
+    background:radial-gradient(circle at center,#1fb6b9,#102c3c 60%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 20px;
+    position:relative;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.hero small{
+    letter-spacing:2px;
+    opacity:0.8;
+}
+
+.hero h1{
+    font-size:70px;
+    font-weight:800;
+    margin:20px 0;
+}
+
+.hero p{
+    opacity:0.8;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+}
+
+.hero-glow{
+    position:absolute;
+    bottom:-30px;
+    width:80%;
+    height:80px;
+    background:radial-gradient(circle,#00f5d4,transparent 70%);
+    filter:blur(40px);
+}
+
+/* ================= CHARACTER CARDS ================= */
+
+.characters{
+    padding:100px 8%;
+    background:#0e2733;
+    text-align:center;
+}
+
+.characters h2{
+    margin-bottom:50px;
+    font-weight:500;
+}
+
+.card-container{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.character-card{
+    width:220px;
+    background:linear-gradient(180deg,#1fb6b9,#133c4a);
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.4s;
+    cursor:pointer;
+}
+
+.character-card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+}
+
+.character-card h4{
+    padding:15px;
+}
+
+.character-card:hover{
+    transform:translateY(-10px) scale(1.05);
+}
+
+/* ================= CHARACTER SELECT ================= */
+
+.character-select{
+    padding:100px 8%;
+    background:#081a22;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.character-text{
+    max-width:500px;
+}
+
+.character-text h2{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.character-text p{
+    opacity:0.8;
+    margin-bottom:20px;
+}
+
+.character-image{
+    position:relative;
+}
+
+.character-image img{
+    width:400px;
+}
+
+.character-name{
+    position:absolute;
+    bottom:-20px;
+    left:50%;
+    transform:translateX(-50%);
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+    .character-select{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .character-text{
+        margin-bottom:50px;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Profile</li>
+            <li>Character</li>
+            <li>Game</li>
+        </ul>
+    </nav>
+
+    <div class="nav-right">
+        <button class="btn-outline">Search</button>
+        <button class="btn-fill">For more info</button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <small>NOW LIVE</small>
+        <h1>INTRODUCING<br>NEW CHARACTER</h1>
+        <p>Shrouded in mystery, a shadow emerges from the past. With eyes that hold untold stories and a presence that commands attention.</p>
+
+        <div class="hero-buttons">
+            <button class="btn-fill">Description</button>
+            <button class="btn-outline">Next for detail</button>
+        </div>
+    </div>
+
+    <div class="hero-glow"></div>
+</section>
+
+<section class="characters">
+    <h2>Character to play</h2>
+
+    <div class="card-container">
+        <div class="character-card">
+            <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432" alt="">
+            <h4>Asuka Renjou</h4>
+        </div>
+
+        <div class="character-card">
+            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" alt="">
+            <h4>Takeru Hoshino</h4>
+        </div>
+
+        <div class="character-card">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="">
+            <h4>Lyara Veylith Arata</h4>
+        </div>
+
+        <div class="character-card">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" alt="">
+            <h4>Shiro Kazama</h4>
+        </div>
+    </div>
+</section>
+
+<section class="character-select">
+    <div class="character-text">
+        <h2>CHARACTER SELECT</h2>
+        <p>Lyara has a gentle yet strong impression, symbolizing a woman with elegance and determination. Her crystal arrow can destroy enemy barriers and paralyze dark creatures.</p>
+        <button class="btn-fill">Read More</button>
+    </div>
+
+    <div class="character-image">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="">
+        <div class="character-name">LYARA VEYLITH</div>
+    </div>
+</section>
+
+</body>
+</html>
