@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#5b4c49;
+}
+
+/* ================= NAVBAR ================= */
+
+header{
+    background:#d9b8a4;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:700;
+    font-size:22px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:30px;
+}
+
+nav ul li{
+    cursor:pointer;
+    font-weight:500;
+}
+
+.search{
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    background:#1f1f1f;
+    color:#fff;
+    padding:80px 8%;
+    position:relative;
+}
+
+.hero h4{
+    font-weight:300;
+    letter-spacing:2px;
+}
+
+.hero h1{
+    font-size:60px;
+    margin:10px 0;
+    color:#d9b8a4;
+}
+
+.hero button{
+    padding:12px 25px;
+    border:none;
+    background:#fff;
+    cursor:pointer;
+    border-radius:20px;
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+    background:#d9b8a4;
+    padding:60px 8%;
+    text-align:center;
+}
+
+.section h2{
+    margin-bottom:10px;
+}
+
+.section p{
+    color:#333;
+    margin-bottom:40px;
+}
+
+/* ================= CATEGORY CARDS ================= */
+
+.categories{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#1f1f1f;
+    color:#fff;
+    padding:40px;
+    border-radius:20px;
+    width:250px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card button{
+    margin-top:15px;
+    padding:8px 15px;
+    border:none;
+    background:#d9b8a4;
+    cursor:pointer;
+}
+
+/* ================= MILKSHAKES ================= */
+
+.products{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.product{
+    background:#e8cfc0;
+    padding:25px;
+    border-radius:20px;
+    width:220px;
+}
+
+.product img{
+    width:100px;
+    margin-bottom:10px;
+}
+
+.product button{
+    padding:8px 12px;
+    border:none;
+    background:#1f1f1f;
+    color:#fff;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+/* ================= BLOGS ================= */
+
+.blogs{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.blog{
+    background:#e8cfc0;
+    padding:20px;
+    border-radius:20px;
+    width:280px;
+    text-align:left;
+}
+
+.blog img{
+    width:100%;
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+.blog button{
+    margin-top:10px;
+    padding:6px 12px;
+    border:none;
+    background:#1f1f1f;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#1f1f1f;
+    color:#fff;
+    padding:50px 8%;
+}
+
+.footer-grid{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.footer-grid div{
+    margin-bottom:20px;
+}
+
+.footer-grid h4{
+    margin-bottom:15px;
+}
+
+.footer-grid ul{
+    list-style:none;
+}
+
+.footer-grid ul li{
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.bottom-bar{
+    background:#d9b8a4;
+    text-align:center;
+    padding:10px;
+    font-size:14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    nav ul{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .footer-grid{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Coffee Solutions</div>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Menu</li>
+            <li>Blog</li>
+            <li>Media</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+    <div class="search">🔍</div>
+</header>
+
+<section class="hero">
+    <h4>FRESHLY ROASTED</h4>
+    <h1>COFFEE</h1>
+    <button>Shop Now</button>
+</section>
+
+<section class="section">
+    <h2>TOP CATEGORIES</h2>
+    <p>Explore The Recent Most Bought Drinks This Week</p>
+
+    <div class="categories">
+        <div class="card">
+            <h3>Coffee Mocha</h3>
+            <button>View More</button>
+        </div>
+
+        <div class="card">
+            <h3>Expresso Americano</h3>
+            <button>View More</button>
+        </div>
+
+        <div class="card">
+            <h3>Cappuccino</h3>
+            <button>View More</button>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>TOP MILK SHAKES</h2>
+    <p>Explore The Recent Most Bought Shakes This Week</p>
+
+    <div class="products">
+        <div class="product">
+            <h4>Mocha Shake</h4>
+            <p>$20.00</p>
+            <button>Buy Now</button>
+        </div>
+
+        <div class="product">
+            <h4>Lavender Shake</h4>
+            <p>$20.00</p>
+            <button>Buy Now</button>
+        </div>
+
+        <div class="product">
+            <h4>Caramel Shake</h4>
+            <p>$20.00</p>
+            <button>Buy Now</button>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>LATEST BLOGS</h2>
+    <p>Explore The Recent Most Bought Shakes This Week</p>
+
+    <div class="blogs">
+        <div class="blog">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" alt="">
+            <h4>Coffee Connoisseur</h4>
+            <p>Learn about the art of coffee tasting and brewing techniques.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="blog">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" alt="">
+            <h4>Coffee Culture</h4>
+            <p>Discover how coffee brings people together around the world.</p>
+            <button>Read More</button>
+        </div>
+
+        <div class="blog">
+            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31" alt="">
+            <h4>Perfect Brew</h4>
+            <p>Step by step guide to making the perfect cup at home.</p>
+            <button>Read More</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h4>Products</h4>
+            <ul>
+                <li>Shoes</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Category</h4>
+            <ul>
+                <li>Men</li>
+                <li>New In</li>
+                <li>Weekly Pick</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Company Info</h4>
+            <ul>
+                <li>About Us</li>
+                <li>Contact us</li>
+                <li>Payment Options</li>
+                <li>Support</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Follow Us</h4>
+            <ul>
+                <li>Instagram</li>
+                <li>Facebook</li>
+                <li>YouTube</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div class="bottom-bar">
+    Data settings | Cookie settings | Privacy Policy | Terms And Conditions | Imprint
+</div>
+
+</body>
+</html>
